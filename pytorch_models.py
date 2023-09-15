@@ -3,10 +3,10 @@ import torch.nn as nn
 from torch_geometric.nn import MessagePassing
 
 class MultiLayerPerceptron(nn.Module):
-    def __init__(self, n_hidden_layers, hidden_dim, in_dim, out_dim):
+    def __init__(self, n_hidden_layers=3, hidden_dim=32, in_dim=8, out_dim=2):
         super().__init__()
-        self.n_layers = n_layers
-        self.n_hidden = n_hidden
+        self.n_hidden_layers = n_hidden_layers
+        self.hidden_dim = hidden_dim
         self.in_dim = in_dim
         self.out_dim = out_dim
 
@@ -27,7 +27,7 @@ class MultiLayerPerceptron(nn.Module):
     
 
 class GraphBeliefPropagationNN(nn.Module):
-    def __init__(self, n_nodes, y_labels_truth, perceptron_params, bp_iterations, n_cats=2):
+    def __init__(self, n_nodes, perceptron_params, bp_iterations, n_cats=2):
         super().__init__()
         self.MultiLayerPerceptron = MultiLayerPerceptron(**perceptron_params)
         self.bp_iterations = bp_iterations
