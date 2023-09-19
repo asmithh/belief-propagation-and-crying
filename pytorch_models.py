@@ -1,6 +1,5 @@
 import torch
 import torch.nn as nn
-from torch_geometric.nn import MessagePassing
 
 class MultiLayerPerceptron(nn.Module):
     def __init__(self, n_hidden_layers=3, hidden_dim=32, in_dim=8, out_dim=2):
@@ -34,7 +33,6 @@ class GraphBeliefPropagationNN(nn.Module):
         self.H_matrix = nn.Parameter(torch.zeros(n_cats, n_cats))
         self.n_cats = n_cats
         self.n_nodes = n_nodes
-        self.y_labels_truth = y_labels_truth
 
     def compute_self_potentials(self, X):
         return nn.LogSoftmax(self.MultiLayerPerceptron(X))
